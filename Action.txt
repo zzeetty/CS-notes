@@ -1,0 +1,7 @@
+//method 1
+//calling controls across threads
+
+this.Invoke(new Action(()=>{
+
+    textBox1.Text="";
+}))
