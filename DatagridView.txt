@@ -1,0 +1,28 @@
+//Area 1
+//a method to search rowIndex by using cellValue
+
+int SearchRowIndex(string cellValue,int cellColumnInex)
+{
+    datagridview1.AllowUserToAddRows=false;
+    for(int i=0;i<datagridview1.Rows.Count;i++)
+    {
+        if(datagridview1[cellColumnInex,i].Value.Tostring().Indexof(cellValue)!=-1)
+        return i;
+    }
+    return 0;
+}
+
+int SearchRowIndex(string cellValue)
+{
+    datagridview1.AllowUserToAddRows=false;
+    datagridview1.AllowUserToAddColumns=false;
+    for(int i=0;i<datagridview1.Rows.Count;i++)
+    {
+        for(int j=0;j<datagridview1.Columns.Count;j++)
+        {
+            if(datagridview1[j,i].Value.Tostring().Indexof(cellValue)!=-1)
+            return i;
+        }        
+    }
+    return 0;
+}
