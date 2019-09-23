@@ -1,0 +1,4 @@
+//method 1
+
+string input1="123";
+int temp=Convert.ToInt16(input1,16);//Convert inut1 to hexadecimal
