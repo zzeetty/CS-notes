@@ -1,0 +1,18 @@
+//Area 1
+//a introduction of abstract class
+
+public abstract class Motion
+{
+    protected Motion(Parameter a){……}
+    public abstract GetPosition();
+}
+public abstract class Robot:Motion
+{
+    protected Robot(){}
+
+    protect Robot(Parameter a):base(a){}
+
+    public override double GetPosition(Axis axis){……}
+}
+public abstract class DeltaRobot:Robot{……}
+public abstract class ScaraRobot:DeltaRobot{……}
