@@ -1,0 +1,5 @@
+//Area 1
+//Get the size of a strings
+
+Graphics g=this.CreateGraphics();
+SizeF sizef=g.MeasurieString(this.button1.Text,this.button1.Font);

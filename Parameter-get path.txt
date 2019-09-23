@@ -1,0 +1,7 @@
+//Method1
+
+string path=Environment.CurrentDirectory+"\\Data"+"\\Parameter.ini";
+
+//M2
+
+path=Application.StartupPath+"\\Data"+"\\Parameter.ini";

@@ -1,0 +1,22 @@
+//Area 1
+//properity: get or set
+
+public ushort CamX_Address
+{
+    set
+    {
+        if( value>0xFFFF)
+        {
+            _CamX_Address=0xFFFF;
+        }
+        else
+        {
+            _CamX_Address=value;
+        }
+    }
+    get
+    {
+        return _CamX_Address;
+    }
+}
+private ushort _CamX_Address=0x1000;
