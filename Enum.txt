@@ -1,0 +1,14 @@
+
+//method 1
+//match string in enum
+
+enum ColorBox
+{
+   RED,
+   YELLOW,
+   BLACK
+}
+string input1="RED";
+
+ColorBox color;
+Enum.TryParse<ColorBox>(input1,out color);
