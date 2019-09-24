@@ -1,0 +1,37 @@
+//create a dynamic boundary for winform controls
+//drag by mouse
+
+private Point pPoint;
+private Point cPoint;
+bool ifDragToResize=false;
+
+private void dgv_MouseDown(object sender,MouseEventArgs e)
+{
+    if(e.Location.X>(dgv.Size.Width-10)&&e.Location.X<(dgv.Size.Width+5))
+    {
+        ifDragToResize=true;
+        pPoint=Cursor.Position;
+    }
+}
+private void dgv_MouseUp(object sender,MouseEventArgs e)
+{
+    if(ifDragToResize==true)
+    {
+        ifDragToResize=false;
+    }
+}
+private void dgv_MouseMove(object sender,MouseEventArgs e)
+{
+    if(ifDragToResize==true)
+    {
+        cPoint=Cursor.Position;
+        int deltaX=cPoint.X-pPoint.X;
+
+        if(e.Location.X-dgv.Location.X>50)
+        {
+            dgv.Width+=deltaX;
+            pPoint=cPoint;
+        }
+        pPoint=cPoint;
+    }
+}
