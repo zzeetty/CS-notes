@@ -1,0 +1,66 @@
+//get method names in class or others
+
+Type Craft=typeof(IcraftFunction.IcraftFunction);
+Type CraftBase=typeof(IcraftFunction.IBasecraftFunction);
+
+private string[][] GetMethods(Type type)
+{
+    MethodInfo[] ko=type.GetMethods();
+    string[] methodnames=new string [ko.Length];
+    string[] paras=new string [ko.Length];
+    for(int i=0;i<ko.Length;i++)
+    {
+         methodnames[i]=ko[i].Name;       
+
+         ParameterInfo[]dg=ko[i].GetParameters();
+         string[][] paras1=new string[dg.Length][];
+         string paratemp="";
+         for(int j=0;j<dg.Length;j++)
+         {
+            paratemp=paratemp+dg[j].ToString();
+            if(j!=dg.Length-1)
+            {
+                paratemp=paratemp+",";
+            }
+            if(paratemp==null)
+            {
+                paratemp="";
+            }
+            paras[i]=paratemp;
+         }
+    }
+    return new string[2][]{methodnames,paras};
+}
+
+private string[][] GetMethodsForTwo(Type type,Type type2)
+{
+    string[][]box1=GetMethods(type);
+    string[][]box2=GetMethods(type2);
+
+    List<string[]>combineBox=new List<string[]>();
+
+    for(int i=0;i<2;i++)
+    {
+        combineBox.Add(new string[box1[0].Getlength(0)+box2[0].Getlength(0)]);
+        for(int j=0;j<box1[0].Getlength(0);j++)
+        {
+            if(box1[i][j]==null)
+            {
+                box1[i][j]="";               
+            }
+            combineBox[i][j]=box1[i][j];
+        }        
+    }
+    for(int i=0;i<2;i++)
+    {        
+        for(int j=0;j<box2[0].Getlength(0);j++)
+        {
+            if(box2[i][j]==null)
+            {
+                box2[i][j]="";                
+            }
+            combineBox[i][j+box1[0].Getlength(0)]=box2[i][j];
+        }        
+    }
+    return combineBox.ToArray(); 
+}
