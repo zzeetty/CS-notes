@@ -1,0 +1,89 @@
+//area 1 
+//two methods of traversing a dictionary
+
+AssemblyParameters craftParas=new AssemblyParameters();
+void saveParameter(AssemblyMethodsBox method)
+{
+    //method 1
+    foreach(var key in craftParas.assemblyPara[method].IO.Keys)
+    {
+       //any codes
+    }
+
+    //method 2
+    //String[]arr0=new string[craftParas.assem[method].IO.key.Count];
+    //craftParas.assem[method].IO.Keys.CopyTo(arr0,0);
+    //for(int i=0;i<arr0.GetLength(0);i++)
+    //{
+    //    //any codes
+    //}
+}
+
+//area 0 
+//create a dictionary struct
+public class AssemblyParameters
+{
+    public Dictionary<AssemblyMethodsBox,CalculatePara> assemblyPara=new Dictionary<AssemblyMethodsBox,CalculatePara>();
+}
+public class CalculatePara
+{
+    public Dictionary<string,int>IO;
+    public Dictionary<string,CamPt>CamPtData;
+    public Dictionary<string,RobPt>RobPtData;
+    public Dictionary<string,int>SystemPara;
+    public Dictionary<string,CameraSetPara>CameraSetData;
+
+    CamPt DefaultCam;
+    RobPt DefaultRob;
+    CameraSetPara DefaultCameraSetPara;
+
+    CalculatePara(){……}
+    public CalculatePara(AssemblyMethodsBox method)
+    {
+        IO.Add(……,……);
+        SystemPara.Add(……,……);
+        switch(method)
+        {
+            case AssemblyMethodsBox.XX:
+                ……；
+                break;
+            case AssemblyMethodsBox.XX:
+                ForExample();
+                break;
+            default:
+                ……；
+                break;
+        }
+    }
+    void iniDictionary()
+    {
+        IO=new Dictionary<string,int>();
+        CamPtData=new Dictionary<string,CamPt>();
+        RobPtData=new Dictionary<string,RobPt>();
+        SystemPara=new Dictionary<string,int>();
+        CameraSetData=new Dictionary<string,CameraSetPara>();
+    }
+    CamPt NewCamPt(){……}
+    RobPt NewRobPt(){……}
+    CameraSetPara NewCamera()
+    {
+        return de=new Assembly.CameraSetPara();
+    }
+    void ForExample()
+    {
+        IO.Add("XXX",1);
+        CamPtData.Add("XXX",NewCamPt());
+        CameraSetData.Add("XXX",NewCamera());
+    }
+}
+public class CameraSetPara{……}
+public class CamPt
+{
+    public float X=0;
+    public float Y=0;    
+    public float R=0;
+
+    public float[] Get(){……}
+    public void Set(float[]data){……}
+}
+public class RobPt{……}
