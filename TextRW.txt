@@ -1,0 +1,173 @@
+//used for reading and writing by .txt format
+
+public class textRW
+{
+    string filepath;
+    public textRW(string path)
+    {
+        filepath=path;
+    }
+
+    //////////////write area///////////////////
+
+    public void textWrite(string [,]savePara,string divideMark)
+    {
+        string[] WriteString=CombineString(savePara,divideMark);
+        FileWrite(WriteString);
+    }
+    public void textWrite(string[][]savePara,string divideMark)
+    {
+        string[] WriteString=CombineString(savePara,divideMark);
+        FileWrite(WriteString);
+    }
+    public void textWrite(string[,]savePara,string divideMark,Encoding format)
+    {
+        string[] WriteString= CombineString(savePara,divideMark);
+        FileWrite(WriteString,format);
+    }
+    public void textWrite(string[][]savePara,string divideMark,Encoding format)
+    {
+        string[] WriteString= CombineString(savePara,divideMark);
+        FileWrite(WriteString,format);
+    }
+    void FileWrite(string[] editedString)
+    {
+        FileStream fsc=new FileStream(filepath,FileMode.Create);
+        StreamWriter swc=new StreamWriter(fsc);
+
+        swc.Write(editedString[0]);
+        swc.Flush();
+        swc.Close();
+        fsc.Close();
+
+        FileStream fsa=new FileStream(filepath,FileMode.Append);
+        StreamWriter swa=new StreamWriter(fsa);
+        int rows=editedString.Getlength(0);
+        for(int i=0;i<rows-1;i++)
+        {
+            swa.Write("\r\n");
+            swa.Write(editedString[i+1]);
+        }
+        swa.Flush();
+        swa.Close();
+        fsa.Close();
+    }
+    void FileWrite(string[] editedString,Encoding format)
+    {
+        FileStream fsc=new FileStream(filepath,FileMode.Create);
+        StreamWriter swc=new StreamWriter(fsc,format);
+
+        swc.Write(editedString[0]);
+        swc.Flush();
+        swc.Close();
+        fsc.Close();
+
+        FileStream fsa=new FileStream(filepath,FileMode.Append);
+        StreamWriter swa=new StreamWriter(fsa,format);
+        int rows=editedString.Getlength(0);
+        for(int i=0;i<rows-1;i++)
+        {
+            swa.Write("\r\n");
+            swa.Write(editedString[i+1]);
+        }
+        swa.Flush();
+        swa.Close();
+        fsa.Close();
+    }
+    string[] CombineString(string[][] combinePara,string divideMark)
+    {
+        int rows =combinePara.Getlength(0);
+        List<string> result=new List<string>();
+
+        for(int i=0;i<rows;i++)
+        {
+            int columns=combinePara[i].Getlength(0);
+            string currentRowString="";
+            for(int j=0;j<columns;j++)
+            {
+                currentRowString+=(divideMark+combinePara[i][j]);
+            }
+            currentRowString=currentRowString.Substring(divideMark.Length);
+            result.Add(currentRowString);
+        }
+        return result.ToArray;
+    }
+    string[] CombineString(string[,] combinePara,string divideMark)
+    {
+        int rows =combinePara.Getlength(0);
+        int columns=combinePara.Getlength(1);
+        List<string> result=new List<string>();
+
+        for(int i=0;i<rows;i++)
+        {           
+            string currentRowString="";
+            for(int j=0;j<columns;j++)
+            {
+                currentRowString+=(divideMark+combinePara[i][j]);
+            }
+            currentRowString=currentRowString.Substring(divideMark.Length);
+            result.Add(currentRowString);
+        }
+        return result.ToArray;
+    }
+
+     //////////////read area///////////////////
+    public void textRead(string divideMark)
+    {
+        List<string> result=new List<string[]>();
+        StreamReader sR=new StreamReader(filepath,Encoding.Default);
+        string nextline;
+        while((nextline=sR.ReadLine())!=null)
+        {
+            result.Add(DivideStringArray(nextline,divideMark));
+        }
+        sR.cl();
+
+        return result.ToArray();
+    }
+    public void textRead(string divideMark,Encoding format)
+    {
+        List<string> result=new List<string[]>();
+        StreamReader sR=new StreamReader(filepath,format);
+        string nextline;
+        while((nextline=sR.ReadLine())!=null)
+        {
+            result.Add(DivideStringArray(nextline,divideMark));
+        }
+        sR.cl();
+
+        return result.ToArray();
+    }
+    string[] DivideStringArray(string editedString,string divideMark)
+    {
+        List<string>dividepara=new List<string>();
+        int length=editedString.Length;
+
+        string remain_editedString=editedString;
+        string pop_editedString;
+
+        int divideIndex;
+        while((divideIndex=SearchForFirstIndex(remain_editedString,divideMark,out remain_editedString,out pop_editedString))!=-1)
+        {
+            dividepara.Add(pop_editedString);
+        }
+        dividepara.Add(pop_editedString);
+        return dividepara.ToArray();
+    }
+    int SearchForFirstIndex(string editedString,string divideMark,out string remain_editedString,out string pop_editedString)
+    {
+        int divide=editedString.IndexOf(divideMark);
+
+        if(divide>0)
+        {
+            pop_editedString=editedString.Substring(0,divide);
+            remain_editedString=editedString.Substring(divide+1);
+        }
+        else
+        {
+            pop_editedString=editedString;
+            remain_editedString="";
+        }
+        return divide;
+    }
+}
