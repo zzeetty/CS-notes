@@ -1,0 +1,20 @@
+//Write a .csv format file
+//used Dll of my textRW
+
+void generateCSV()
+{
+    SaveFileDialog file=new SaveFileDialog();
+    file.Filter="csv files (*.csv)|.csv";
+    if(file.ShowDialog()==DialogResult.OK)
+    {
+        filepath=file.FileName;
+        filepath.Dispose();
+    }
+    else
+    {
+        return;
+    }
+    textRW write=new textRW(filepath);
+    write.textWrite(adjData(saveData).ToArray(),",",Encoding.UTF8);
+    //MessageBox.Show("Save CSV file success");
+}
